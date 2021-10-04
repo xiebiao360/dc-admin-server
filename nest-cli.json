@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/gatewary/src",
+  "monorepo": true,
+  "root": "apps/gatewary",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/gatewary/tsconfig.app.json"
+  },
+  "projects": {
+    "gatewary": {
+      "type": "application",
+      "root": "apps/gatewary",
+      "entryFile": "main",
+      "sourceRoot": "apps/gatewary/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gatewary/tsconfig.app.json"
+      }
+    },
+    "core": {
+      "type": "application",
+      "root": "apps/core",
+      "entryFile": "main",
+      "sourceRoot": "apps/core/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/core/tsconfig.app.json"
+      }
+    }
+  }
+}
