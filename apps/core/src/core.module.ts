@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CoreController } from './core.controller';
-import { CoreService } from './core.service';
 import databaseConfig from './config/database.config';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -10,8 +9,7 @@ import databaseConfig from './config/database.config';
       load: [databaseConfig],
       isGlobal: true,
     }),
+    UserModule,
   ],
-  controllers: [CoreController],
-  providers: [CoreService],
 })
 export class CoreModule {}
