@@ -11,4 +11,9 @@ export class UserController {
     console.log('received...');
     return this.userService.getHello(name);
   }
+
+  @MessagePattern({ user: 'list' })
+  listUsers() {
+    return this.userService.list();
+  }
 }
