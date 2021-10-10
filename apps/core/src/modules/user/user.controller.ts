@@ -1,19 +1,19 @@
+import { CreateUserByLocalDto } from '@app/common/dtos/core/create-user-by-local.dto';
 import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UserService } from './user.service';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @MessagePattern({ cmd: 'hello' })
-  get(name: string) {
-    console.log('received...');
-    return this.userService.getHello(name);
+  @MessagePattern('createByLocal')
+  create(@Payload() dto: CreateUserByLocalDto) {
+    return this.userService.createByLocal(dto);
   }
 
-  @MessagePattern({ user: 'list' })
-  listUsers() {
-    return this.userService.list();
+  @MessagePattern('findAll')
+  findAll() {
+    return this.userService.findAll();
   }
 }

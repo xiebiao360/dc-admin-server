@@ -14,16 +14,16 @@ export class AccountEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 20, unique: true, nullable: true })
-  name: string;
+  name?: string;
 
   @Column({ nullable: true })
-  password: string;
+  password?: string;
 
   @Column({ type: 'varchar', length: 15, unique: true, nullable: true })
-  phone: string;
+  phone?: string;
 
   @Column({ type: 'varchar', length: 60, unique: true, nullable: true })
-  wechat: string;
+  wechat?: string;
 
   @CreateDateColumn({ name: 'create_date' })
   createDate: Date;

@@ -1,20 +1,21 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/gatewary/src",
+  "sourceRoot": "apps/gateway/src",
   "monorepo": true,
-  "root": "apps/gatewary",
+  "root": "apps/gateway",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/gatewary/tsconfig.app.json"
+    "tsConfigPath": "apps/gateway/tsconfig.app.json",
+    "plugins": ["@nestjs/swagger"]
   },
   "projects": {
-    "gatewary": {
+    "gateway": {
       "type": "application",
-      "root": "apps/gatewary",
+      "root": "apps/gateway",
       "entryFile": "main",
-      "sourceRoot": "apps/gatewary/src",
+      "sourceRoot": "apps/gateway/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/gatewary/tsconfig.app.json"
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
     "core": {
