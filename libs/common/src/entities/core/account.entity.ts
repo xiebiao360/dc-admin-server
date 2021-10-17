@@ -1,4 +1,4 @@
-import DateTransformer from '@app/common/transformers/Date.transformer';
+import { dateTransformer } from '@app/common/transformers/date.transformer';
 import {
   Column,
   CreateDateColumn,
@@ -31,10 +31,10 @@ export class AccountEntity {
   @Column({
     name: 'last_login_date',
     nullable: true,
-    transformer: DateTransformer,
+    transformer: dateTransformer(),
   })
   lastLoginDate: Date;
 
-  @OneToOne(() => UserEntity, (entity) => entity.account, { cascade: true })
+  @OneToOne(() => UserEntity, (entity) => entity.account)
   user: UserEntity;
 }

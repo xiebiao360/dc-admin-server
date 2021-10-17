@@ -1,5 +1,6 @@
 import { GenderEnum } from '@app/common/enums/gender.enum';
-import DateTransformer from '@app/common/transformers/Date.transformer';
+import { dateTransformer } from '@app/common/transformers/date.transformer';
+import { enumTransformer } from '@app/common/transformers/enum.transformer';
 import {
   Column,
   CreateDateColumn,
@@ -16,13 +17,18 @@ export class UserEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
   id: number;
 
-  @Column({ type: 'enum', enum: GenderEnum, default: GenderEnum.unknow })
+  @Column({
+    type: 'enum',
+    enum: GenderEnum,
+    default: GenderEnum.unknow,
+    transformer: enumTransformer(GenderEnum),
+  })
   gender: GenderEnum;
 
   @Column()
   name: string;
 
-  @Column({ nullable: true, transformer: DateTransformer })
+  @Column({ nullable: true, transformer: dateTransformer() })
   birthday: Date;
 
   @CreateDateColumn({ name: 'create_date' })
@@ -31,7 +37,7 @@ export class UserEntity {
   @UpdateDateColumn({ name: 'update_date' })
   updateDate: Date;
 
-  @OneToOne(() => AccountEntity, (entity) => entity.user)
+  @OneToOne(() => AccountEntity, (entity) => entity.user, { cascade: true })
   @JoinColumn()
   account: AccountEntity;
 }
