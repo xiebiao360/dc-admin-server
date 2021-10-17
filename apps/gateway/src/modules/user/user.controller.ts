@@ -10,7 +10,6 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserByLocalDto) {
-    console.log(JSON.stringify(createUserDto));
     return this.client.send('createByLocal', createUserDto);
   }
 
