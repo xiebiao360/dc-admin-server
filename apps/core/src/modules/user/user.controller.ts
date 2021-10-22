@@ -2,6 +2,7 @@ import { CreateUserByLocalDto } from '@app/common/dtos/core/create-user-by-local
 import { ResponseInterceptor } from '@app/common/interceptors/response.interceptor';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -10,8 +11,12 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @MessagePattern('createByLocal')
-  create(@Payload() dto: CreateUserByLocalDto) {
-    return this.userService.createByLocal(dto);
+  @Transaction()
+  create(
+    @Payload() dto: CreateUserByLocalDto,
+    @TransactionManager() manager: EntityManager,
+  ) {
+    return this.userService.createByLocal(manager, dto);
   }
 
   @MessagePattern('findAll')

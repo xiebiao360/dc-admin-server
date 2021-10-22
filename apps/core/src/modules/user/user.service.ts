@@ -4,7 +4,7 @@ import { UserEntity } from '@app/common/entities/core/user.entity';
 import { GenderEnum } from '@app/common/enums/gender.enum';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -15,7 +15,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  createByLocal(dto: CreateUserByLocalDto) {
+  async createByLocal(manager: EntityManager, dto: CreateUserByLocalDto) {
     // 创建账号
     const accountEntity = new AccountEntity();
     accountEntity.name = dto.account;
@@ -27,7 +27,8 @@ export class UserService {
     userEntity.gender = dto.gender || GenderEnum.unknow;
     userEntity.birthday = dto.birthday;
     userEntity.account = accountEntity;
-    return this.userRepository.save(userEntity);
+    await manager.save(userEntity);
+    return true;
   }
 
   findAll() {
