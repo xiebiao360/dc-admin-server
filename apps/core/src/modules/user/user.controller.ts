@@ -1,4 +1,5 @@
-import { CreateUserByLocalDto } from '@app/common/dtos/core/create-user-by-local.dto';
+import { UserConstant } from '@app/common/constants/core/user.constant';
+import { RegisterByLocalDto } from '@app/common/dtos/core/user/register-by-local.dto';
 import { ResponseInterceptor } from '@app/common/interceptors/response.interceptor';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
@@ -10,16 +11,16 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @MessagePattern('createByLocal')
+  @MessagePattern(UserConstant.REGISTER_BY_LOCAL)
   @Transaction()
   create(
-    @Payload() dto: CreateUserByLocalDto,
+    @Payload() dto: RegisterByLocalDto,
     @TransactionManager() manager: EntityManager,
   ) {
-    return this.userService.createByLocal(manager, dto);
+    return this.userService.registerByLocal(manager, dto);
   }
 
-  @MessagePattern('findAll')
+  @MessagePattern(UserConstant.FIND_ALL)
   findAll() {
     return this.userService.findAll();
   }

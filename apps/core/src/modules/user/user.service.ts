@@ -1,4 +1,4 @@
-import { CreateUserByLocalDto } from '@app/common/dtos/core/create-user-by-local.dto';
+import { RegisterByLocalDto } from '@app/common/dtos/core/user/register-by-local.dto';
 import { AccountEntity } from '@app/common/entities/core/account.entity';
 import { UserEntity } from '@app/common/entities/core/user.entity';
 import { GenderEnum } from '@app/common/enums/gender.enum';
@@ -15,7 +15,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createByLocal(manager: EntityManager, dto: CreateUserByLocalDto) {
+  async registerByLocal(manager: EntityManager, dto: RegisterByLocalDto) {
     // 创建账号
     const accountEntity = new AccountEntity();
     accountEntity.name = dto.account;

@@ -2,7 +2,7 @@ import { CommonModule } from '@app/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import serviceConfig from './config/service.config';
-import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { UserModule } from './modules/user/user.module';
       isGlobal: true,
     }),
     CommonModule,
-    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
