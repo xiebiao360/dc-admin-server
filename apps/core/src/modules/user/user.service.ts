@@ -38,4 +38,12 @@ export class UserService {
   findOne(id: number) {
     return this.userRepository.findOne(id);
   }
+
+  findByAccount(account: string) {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .innerJoin('user.account', 'account')
+      .where('account.name = :account', { account })
+      .getOne();
+  }
 }

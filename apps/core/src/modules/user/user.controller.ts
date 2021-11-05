@@ -24,4 +24,9 @@ export class UserController {
   findAll() {
     return this.userService.findAll();
   }
+
+  @MessagePattern(UserConstant.FIND_BY_ACCOUNT)
+  findByAccount(@Payload() account: string) {
+    return this.userService.findByAccount(account);
+  }
 }
