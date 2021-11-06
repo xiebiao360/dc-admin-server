@@ -1,13 +1,11 @@
 import { UserConstant } from '@app/common/constants/core/user.constant';
 import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
-import { ResponseInterceptor } from '@app/common/interceptors/response.interceptor';
-import { Controller, UseInterceptors } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { UserService } from './user.service';
 
 @Controller('user')
-@UseInterceptors(ResponseInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

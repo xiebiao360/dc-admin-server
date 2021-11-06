@@ -1,3 +1,4 @@
+import { UserConstant } from '@app/common/constants/core/user.constant';
 import { GlobalConstant } from '@app/common/constants/global.constant';
 import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
@@ -13,11 +14,11 @@ export class AuthController {
 
   @Post()
   create(@Body() createUserDto: CreateByLocalDto) {
-    return this.client.send('createByLocal', createUserDto);
+    return this.client.send(UserConstant.REGISTER_BY_LOCAL, createUserDto);
   }
 
   @Get()
   listUsers() {
-    return this.client.send('findAll', {});
+    return this.client.send(UserConstant.FIND_ALL, {});
   }
 }

@@ -1,9 +1,11 @@
+import { Exclude } from 'class-transformer';
 import { ResultCodeEnum } from '../enums/result-code.enum';
 import { CustomException } from '../exceptions/custom.exception';
 
 export class ResultUtil<T> {
   readonly code: number;
   readonly data: T;
+  @Exclude()
   readonly error: Error;
   readonly message: string;
 

@@ -17,6 +17,9 @@ export class ResponseInterceptor<T>
   ): Observable<ResultUtil<T>> | Promise<Observable<ResultUtil<T>>> {
     return next.handle().pipe(
       map((m) => {
+        // console.log('m', m);
+        // console.log('extend', m instanceof ResultUtil);
+        // console.log('type', typeof m);
         if (m instanceof ResultUtil) {
           return m;
         }
