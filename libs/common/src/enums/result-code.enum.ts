@@ -1,4 +1,5 @@
 export enum ResultCodeEnum {
-  SUCCESS = 0,
-  FAIL = 1,
+  Success = 0,
+  Fail = 1,
+  ValidateError = 2,
 }

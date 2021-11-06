@@ -1,7 +1,7 @@
 import { IsEnum, Length } from 'class-validator';
 import { GenderEnum } from '@app/common/enums/gender.enum';
 
-export class RegisterByLocalDto {
+export class CreateByLocalDto {
   @Length(1, 25)
   account: string;
 

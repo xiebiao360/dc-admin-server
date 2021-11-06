@@ -1,7 +1,9 @@
-import { RegisterByLocalDto } from '@app/common/dtos/core/user/register-by-local.dto';
+import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
 import { AccountEntity } from '@app/common/entities/core/account.entity';
 import { UserEntity } from '@app/common/entities/core/user.entity';
 import { GenderEnum } from '@app/common/enums/gender.enum';
+import { ValidateException } from '@app/common/exceptions/validate.exception';
+import { CheckUtil } from '@app/common/utils/check.util';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
@@ -15,7 +17,14 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async registerByLocal(manager: EntityManager, dto: RegisterByLocalDto) {
+  async createByLocal(manager: EntityManager, dto: CreateByLocalDto) {
+    const account = await manager.find(AccountEntity, {
+      where: { name: dto.account },
+    });
+    if (!CheckUtil.isNull(account)) {
+      throw new ValidateException('账号已存在');
+    }
+
     // 创建账号
     const accountEntity = new AccountEntity();
     accountEntity.name = dto.account;
@@ -28,7 +37,6 @@ export class UserService {
     userEntity.birthday = dto.birthday;
     userEntity.account = accountEntity;
     await manager.save(userEntity);
-    return true;
   }
 
   findAll() {

@@ -1,5 +1,5 @@
 import { GlobalConstant } from '@app/common/constants/global.constant';
-import { RegisterByLocalDto } from '@app/common/dtos/core/user/register-by-local.dto';
+import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
@@ -12,7 +12,7 @@ export class AuthController {
   ) {}
 
   @Post()
-  create(@Body() createUserDto: RegisterByLocalDto) {
+  create(@Body() createUserDto: CreateByLocalDto) {
     return this.client.send('createByLocal', createUserDto);
   }
 

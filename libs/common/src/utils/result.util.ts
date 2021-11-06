@@ -1,4 +1,5 @@
 import { ResultCodeEnum } from '../enums/result-code.enum';
+import { CustomException } from '../exceptions/custom.exception';
 
 export class ResultUtil<T> {
   readonly code: number;
@@ -14,17 +15,20 @@ export class ResultUtil<T> {
   }
 
   static ok() {
-    return new ResultUtil(ResultCodeEnum.SUCCESS, true, null, '');
+    return new ResultUtil(ResultCodeEnum.Success, true, null, '');
   }
   static data<T>(data: T) {
-    return new ResultUtil(ResultCodeEnum.SUCCESS, data, null, '');
+    return new ResultUtil(ResultCodeEnum.Success, data, null, '');
   }
   static exception(error: Error) {
-    return new ResultUtil(ResultCodeEnum.FAIL, null, error, error.message);
+    if (error instanceof CustomException) {
+      return new ResultUtil(error.code, null, error, error.message);
+    }
+    return new ResultUtil(ResultCodeEnum.Fail, null, error, error.message);
   }
   static error(message: string) {
     return new ResultUtil(
-      ResultCodeEnum.FAIL,
+      ResultCodeEnum.Fail,
       null,
       new Error(message),
       message,
