@@ -1,7 +1,6 @@
-import { ResponseInterceptor } from '@app/common/interceptors/response.interceptor';
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { CustomProvider } from '@app/common/providers/custom.provider';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConfig from './config/database.config';
 import { UserModule } from './modules/user/user.module';
@@ -19,15 +18,6 @@ import { UserModule } from './modules/user/user.module';
     }),
     UserModule,
   ],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ClassSerializerInterceptor,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ResponseInterceptor,
-    },
-  ],
+  providers: [...CustomProvider.forResponseProviders()],
 })
 export class CoreModule {}

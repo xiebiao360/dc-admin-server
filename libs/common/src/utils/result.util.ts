@@ -23,6 +23,7 @@ export class ResultUtil<T> {
     return new ResultUtil(ResultCodeEnum.Success, data, null, '');
   }
   static exception(error: Error) {
+    console.error(error.stack);
     if (error instanceof CustomException) {
       return new ResultUtil(error.code, null, error, error.message);
     }

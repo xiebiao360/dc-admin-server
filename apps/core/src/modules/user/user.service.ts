@@ -21,7 +21,7 @@ export class UserService {
     const account = await manager.find(AccountEntity, {
       where: { name: dto.account },
     });
-    if (!CheckUtil.isNull(account)) {
+    if (!CheckUtil.isNull(account) && account.length > 0) {
       throw new ValidateException('账号已存在');
     }
 

@@ -1,8 +1,7 @@
 import { CommonModule } from '@app/common';
-import { ResponseInterceptor } from '@app/common/interceptors/response.interceptor';
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { CustomProvider } from '@app/common/providers/custom.provider';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 import serviceConfig from './config/service.config';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -15,15 +14,6 @@ import { AuthModule } from './modules/auth/auth.module';
     CommonModule,
     AuthModule,
   ],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ClassSerializerInterceptor,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ResponseInterceptor,
-    },
-  ],
+  providers: [...CustomProvider.forResponseProviders()],
 })
 export class AppModule {}
