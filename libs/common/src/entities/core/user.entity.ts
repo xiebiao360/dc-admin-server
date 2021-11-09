@@ -1,6 +1,7 @@
 import { GenderEnum } from '@app/common/enums/gender.enum';
 import { dateTransformer } from '@app/common/transformers/date.transformer';
 import { enumTransformer } from '@app/common/transformers/enum.transformer';
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -37,6 +38,7 @@ export class UserEntity {
   @UpdateDateColumn({ name: 'update_date' })
   updateDate: Date;
 
+  @Exclude()
   @OneToOne(() => AccountEntity, (entity) => entity.user, { cascade: true })
   @JoinColumn()
   account: AccountEntity;

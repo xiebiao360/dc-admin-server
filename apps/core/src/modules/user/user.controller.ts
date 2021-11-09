@@ -23,8 +23,8 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @MessagePattern(UserConstant.FIND_BY_ACCOUNT)
-  findByAccount(@Payload() account: string) {
-    return this.userService.findByAccount(account);
+  @MessagePattern(UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD)
+  findByAccountAndPassword(@Payload() { account, password }) {
+    return this.userService.findByAccountAndPassword(account, password);
   }
 }

@@ -1,4 +1,5 @@
 import { dateTransformer } from '@app/common/transformers/date.transformer';
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -16,6 +17,7 @@ export class AccountEntity {
   @Column({ type: 'varchar', length: 20, unique: true, nullable: true })
   name?: string;
 
+  @Exclude()
   @Column({ nullable: true })
   password?: string;
 

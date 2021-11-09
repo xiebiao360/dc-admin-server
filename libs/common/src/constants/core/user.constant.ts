@@ -10,5 +10,5 @@ export enum UserConstant {
   /**
    * 查找单个用户
    */
-  FIND_BY_ACCOUNT = 'find-by-account',
+  FIND_BY_ACCOUNT_AND_PASSWORD = 'find-by-account-and-password',
 }

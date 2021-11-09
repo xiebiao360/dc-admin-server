@@ -47,11 +47,12 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
 
-  findByAccount(account: string) {
+  findByAccountAndPassword(account: string, password: string) {
     return this.userRepository
       .createQueryBuilder('user')
       .innerJoin('user.account', 'account')
       .where('account.name = :account', { account })
+      .andWhere('account.password = :password', { password })
       .getOne();
   }
 }
