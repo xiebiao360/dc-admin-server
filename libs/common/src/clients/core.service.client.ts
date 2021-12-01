@@ -12,7 +12,7 @@ export class CoreServiceClient implements IServiceClient {
     @Inject(GlobalConstant.CORE_SERVICE) private readonly client: ClientProxy,
   ) {}
 
-  async request<T>(pattern: string, data: T): Promise<T> {
+  async request<T>(pattern: string, data: any): Promise<T> {
     const response = this.client.send<ResultUtil<T>>(pattern, data);
     const result = await lastValueFrom(response);
     if (result.code === ResultCodeEnum.Success) {
