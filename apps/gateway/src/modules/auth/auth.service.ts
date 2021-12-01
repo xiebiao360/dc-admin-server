@@ -2,6 +2,7 @@ import { UserConstant } from '@app/common/constants/core/user.constant';
 import { GlobalConstant } from '@app/common/constants/global.constant';
 import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
 import { UserEntity } from '@app/common/entities/core/user.entity';
+import { ResultUtil } from '@app/common/utils/result.util';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
@@ -16,7 +17,7 @@ export class AuthService {
   }
 
   validateUser(account: string, password: string) {
-    const entityObs = this.client.send<UserEntity>(
+    const entityObs = this.client.send<ResultUtil<UserEntity>>(
       UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD,
       { account, password },
     );

@@ -11,7 +11,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from '../../guards/local-auth.guard';
 import { AuthService } from './auth.service';
 
-@ApiTags('auth')
+@ApiTags()
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -28,8 +28,8 @@ export class AuthController {
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  login(@Request() req) {
+  @Post('auth/loginByLocal')
+  async login(@Request() req) {
     return req.user;
   }
 }
