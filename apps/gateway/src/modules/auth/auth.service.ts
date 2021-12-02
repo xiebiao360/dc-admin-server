@@ -1,21 +1,19 @@
-import { CoreServiceClient } from '@app/common/clients/core.service.client';
-import { UserConstant } from '@app/common/constants/core/user.constant';
 import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
-import { UserEntity } from '@app/common/entities/core/user.entity';
+import { UserServiceProxy } from '@app/service-proxy';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly client: CoreServiceClient) {}
+  constructor(private readonly userService: UserServiceProxy) {}
   registerByLocal(dto: CreateByLocalDto) {
-    return this.client.request(UserConstant.REGISTER_BY_LOCAL, dto);
+    return this.userService.createByLocal(dto);
   }
 
-  validateUser(account: string, password: string) {
-    const entityObs = this.client.request<UserEntity>(
-      UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD,
-      { account, password },
-    );
+  async validateUser(account: string, password: string) {
+    const entityObs = await this.userService.findByAccountAndPassword({
+      account,
+      password,
+    });
     return entityObs;
   }
 }

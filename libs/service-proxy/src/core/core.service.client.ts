@@ -1,10 +1,10 @@
+import { GlobalConstant } from '@app/common/constants/global.constant';
+import { ResultCodeEnum } from '@app/common/enums/result-code.enum';
+import { IServiceClient } from '@app/common/interfaces/service.client.interface';
+import { ResultUtil } from '@app/common/utils/result.util';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
-import { GlobalConstant } from '../constants/global.constant';
-import { ResultCodeEnum } from '../enums/result-code.enum';
-import { IServiceClient } from '../interfaces/service.client.interface';
-import { ResultUtil } from '../utils/result.util';
 
 @Injectable()
 export class CoreServiceClient implements IServiceClient {
@@ -18,6 +18,6 @@ export class CoreServiceClient implements IServiceClient {
     if (result.code === ResultCodeEnum.Success) {
       return result.data;
     }
-    throw new Error(result.message);
+    return Promise.reject(result.message);
   }
 }

@@ -24,7 +24,11 @@ export class UserController {
   }
 
   @MessagePattern(UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD)
-  findByAccountAndPassword(@Payload() { account, password }) {
-    return this.userService.findByAccountAndPassword(account, password);
+  async findByAccountAndPassword(@Payload() { account, password }) {
+    const result = await this.userService.findByAccountAndPassword(
+      account,
+      password,
+    );
+    return result;
   }
 }

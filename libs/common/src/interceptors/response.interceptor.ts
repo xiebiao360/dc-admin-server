@@ -16,18 +16,21 @@ export class ResponseInterceptor<T>
     next: CallHandler<any>,
   ): Observable<ResultUtil<T>> | Promise<Observable<ResultUtil<T>>> {
     return next.handle().pipe(
-      map((m) => {
-        if (m instanceof ResultUtil) {
-          return m;
+      map((data) => {
+        if (!data) {
+          return ResultUtil.data(data);
+        }
+        if (data instanceof ResultUtil) {
+          return data;
         }
         if (
           ['code', 'data', 'message'].every((e) =>
-            Object.prototype.hasOwnProperty.call(m, e),
+            Object.prototype.hasOwnProperty.call(data, e),
           )
         ) {
-          return m;
+          return data;
         }
-        return ResultUtil.data(m);
+        return ResultUtil.data(data);
       }),
       catchError((err) => of(ResultUtil.exception(err))),
     );

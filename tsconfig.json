@@ -18,6 +18,12 @@
       ],
       "@app/common/*": [
         "libs/common/src/*"
+      ],
+      "@app/service-proxy": [
+        "libs/service-proxy/src"
+      ],
+      "@app/service-proxy/*": [
+        "libs/service-proxy/src/*"
       ]
     }
   }

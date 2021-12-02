@@ -6,7 +6,9 @@
   "compilerOptions": {
     "webpack": true,
     "tsConfigPath": "apps/gateway/tsconfig.app.json",
-    "plugins": ["@nestjs/swagger"]
+    "plugins": [
+      "@nestjs/swagger"
+    ]
   },
   "projects": {
     "gateway": {
@@ -34,6 +36,15 @@
       "sourceRoot": "libs/common/src",
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "service-proxy": {
+      "type": "library",
+      "root": "libs/service-proxy",
+      "entryFile": "index",
+      "sourceRoot": "libs/service-proxy/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/service-proxy/tsconfig.lib.json"
       }
     }
   }

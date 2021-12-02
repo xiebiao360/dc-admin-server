@@ -19,7 +19,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         password: string,
         done: (error: any, user?: any, options?: IVerifyOptions) => void,
       ) => {
-        console.log({ req: req.body, account, password });
+        // console.log({ req: req.body, account, password });
         try {
           const user = await this.authService.validateUser(account, password);
           if (!user) {
