@@ -18,9 +18,9 @@ export class UserController {
     await this.userService.createByLocal(manager, dto);
   }
 
-  @MessagePattern(UserConstant.FIND_ALL)
-  findAll() {
-    return this.userService.findAll();
+  @MessagePattern(UserConstant.FIND_BY_ID)
+  findById(@Payload() { id }) {
+    return this.userService.findOne(id);
   }
 
   @MessagePattern(UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD)

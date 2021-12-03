@@ -8,7 +8,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { LocalAuthGuard } from '../../guards/local-auth.guard';
+import { JwtAuthGuard } from '../../guards/jwt.auth.guard';
+import { LocalAuthGuard } from '../../guards/local.auth.guard';
 import { AuthService } from './auth.service';
 
 @ApiTags()
@@ -21,15 +22,15 @@ export class AuthController {
     return this.authService.registerByLocal(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile() {
-    // return this.authService.validateUser();
-    return '';
+  getProfile(@Request() req) {
+    return req.user;
   }
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/loginByLocal')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 }

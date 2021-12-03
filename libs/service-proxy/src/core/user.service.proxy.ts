@@ -8,8 +8,8 @@ import { CoreServiceClient } from './core.service.client';
 export class UserServiceProxy {
   constructor(private readonly client: CoreServiceClient) {}
 
-  findAll() {
-    return this.client.request<UserEntity[]>(UserConstant.FIND_ALL, {});
+  findById(id: number) {
+    return this.client.request<UserEntity>(UserConstant.FIND_BY_ID, { id });
   }
 
   findByAccountAndPassword(data: { account: string; password: string }) {

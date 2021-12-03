@@ -26,6 +26,6 @@ import { UserServiceProxy } from './user.service.proxy';
     CoreServiceClient,
     UserServiceProxy,
   ],
-  exports: [CoreServiceModule, UserServiceProxy],
+  exports: [UserServiceProxy],
 })
-export class CoreServiceModule {}
+export class CoreServiceProxyModule {}
