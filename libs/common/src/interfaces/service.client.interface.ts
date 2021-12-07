@@ -1,3 +1,5 @@
+import { PatternMetadata } from '@nestjs/microservices';
+
 export interface IServiceClient {
-  request<T>(pattern: string, data: T): Promise<T>;
+  request<T>(pattern: PatternMetadata, data: T): Promise<T>;
 }

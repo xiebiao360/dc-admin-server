@@ -1,29 +1,28 @@
-import { UserConstant } from '@app/common/constants/core/user.constant';
-import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
+import { CreateByLocalDto } from '@app/common/dtos/core';
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @MessagePattern(UserConstant.REGISTER_BY_LOCAL)
+  @MessagePattern({ user: 'createByLocal' })
   @Transaction()
-  async create(
+  async createByLocal(
     @Payload() dto: CreateByLocalDto,
     @TransactionManager() manager: EntityManager,
   ) {
     await this.userService.createByLocal(manager, dto);
   }
 
-  @MessagePattern(UserConstant.FIND_BY_ID)
+  @MessagePattern({ user: 'findById' })
   findById(@Payload() { id }) {
     return this.userService.findOne(id);
   }
 
-  @MessagePattern(UserConstant.FIND_BY_ACCOUNT_AND_PASSWORD)
+  @MessagePattern({ user: 'findByAccountAndPassword' })
   async findByAccountAndPassword(@Payload() { account, password }) {
     const result = await this.userService.findByAccountAndPassword(
       account,

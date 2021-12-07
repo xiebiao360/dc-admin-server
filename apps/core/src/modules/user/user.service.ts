@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
+import { CreateByLocalDto } from '@app/common/dtos/core';
 import { AccountEntity, UserEntity } from '@app/common/entities/core';
 import { GenderEnum } from '@app/common/enums/gender.enum';
 import { ValidateException } from '@app/common/exceptions/validate.exception';

@@ -3,7 +3,7 @@ import { ResultCodeEnum } from '@app/common/enums/result-code.enum';
 import { IServiceClient } from '@app/common/interfaces/service.client.interface';
 import { ResultUtil } from '@app/common/utils/result.util';
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, PatternMetadata } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class CoreServiceClient implements IServiceClient {
     @Inject(GlobalConstant.CORE_SERVICE) private readonly client: ClientProxy,
   ) {}
 
-  async request<T>(pattern: string, data: any): Promise<T> {
+  async request<T>(pattern: PatternMetadata, data: any): Promise<T> {
     const response = this.client.send<ResultUtil<T>>(pattern, data);
     const result = await lastValueFrom(response);
     if (result.code === ResultCodeEnum.Success) {

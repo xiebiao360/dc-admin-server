@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core/user/create-by-local.dto';
+import { CreateByLocalDto } from '@app/common/dtos/core';
 import {
   Body,
   Controller,
