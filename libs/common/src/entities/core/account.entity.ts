@@ -1,20 +1,12 @@
 import { dateTransformer } from '@app/common/transformers/date.transformer';
 import { Exclude } from 'class-transformer';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
+import { BaseEntity } from '../base.entity';
 import { UserEntity } from './user.entity';
 
 @Entity({ name: 'sys_account' })
-export class AccountEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  id: number;
-
-  @Column({ type: 'varchar', length: 20, unique: true, nullable: true })
+export class AccountEntity extends BaseEntity {
+  @Column({ type: 'varchar', length: 64, unique: true, nullable: true })
   name?: string;
 
   @Exclude()
@@ -24,11 +16,8 @@ export class AccountEntity {
   @Column({ type: 'varchar', length: 15, unique: true, nullable: true })
   phone?: string;
 
-  @Column({ type: 'varchar', length: 60, unique: true, nullable: true })
+  @Column({ type: 'varchar', length: 64, unique: true, nullable: true })
   wechat?: string;
-
-  @CreateDateColumn({ name: 'create_date' })
-  createDate: Date;
 
   @Column({
     name: 'last_login_date',

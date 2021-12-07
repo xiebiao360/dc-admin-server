@@ -1,21 +1,16 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { BaseEntity } from '../base.entity';
 
 @Entity({ name: 'sys_permission' })
-export class PermissionEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  id: number;
-
-  @Column()
+export class PermissionEntity extends BaseEntity {
+  @Column({ length: 64 })
   name: string;
 
-  @Column()
+  @Column({ length: 32 })
   key: string;
+
+  @Column({ length: 255 })
+  description: string;
 
   @ManyToOne(() => PermissionEntity, (permission) => permission.children)
   parent: PermissionEntity;

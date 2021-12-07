@@ -1,5 +1,10 @@
-import { AccountEntity } from '@app/common/entities/core/account.entity';
-import { UserEntity } from '@app/common/entities/core/user.entity';
+import {
+  AccountEntity,
+  GroupEntity,
+  PermissionEntity,
+  RoleEntity,
+  UserEntity,
+} from '@app/common/entities/core';
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('database', () => ({
@@ -9,6 +14,12 @@ export default registerAs('database', () => ({
   username: process.env.DATABASE_USER || 'root',
   password: process.env.DATABASE_PASSWORD || 'root',
   database: process.env.DATABASE_DB || 'test',
-  entities: [AccountEntity, UserEntity],
+  entities: [
+    AccountEntity,
+    UserEntity,
+    PermissionEntity,
+    RoleEntity,
+    GroupEntity,
+  ],
   synchronize: true,
 }));

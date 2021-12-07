@@ -10,7 +10,6 @@ import { UserServiceProxy } from './user.service.proxy';
   imports: [
     ConfigModule.forRoot({
       load: [ServiceConfig],
-      // isGlobal: true,
     }),
   ],
   providers: [

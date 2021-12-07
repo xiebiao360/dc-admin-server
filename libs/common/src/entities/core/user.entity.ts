@@ -4,20 +4,18 @@ import { enumTransformer } from '@app/common/transformers/enum.transformer';
 import { Exclude } from 'class-transformer';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
+import { BaseEntity } from '../base.entity';
 import { AccountEntity } from './account.entity';
+import { RoleEntity } from './role.entity';
 
 @Entity({ name: 'sys_user' })
-export class UserEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
-  id: number;
-
+export class UserEntity extends BaseEntity {
   @Column({
     type: 'enum',
     enum: GenderEnum,
@@ -26,20 +24,18 @@ export class UserEntity {
   })
   gender: GenderEnum;
 
-  @Column()
+  @Column({ length: 64 })
   name: string;
 
   @Column({ nullable: true, transformer: dateTransformer() })
   birthday: Date;
 
-  @CreateDateColumn({ name: 'create_date' })
-  createDate: Date;
-
-  @UpdateDateColumn({ name: 'update_date' })
-  updateDate: Date;
-
   @Exclude()
   @OneToOne(() => AccountEntity, (entity) => entity.user, { cascade: true })
   @JoinColumn()
   account: AccountEntity;
+
+  @ManyToMany(() => RoleEntity)
+  @JoinTable()
+  roles: RoleEntity[];
 }

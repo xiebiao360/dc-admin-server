@@ -1,5 +1,4 @@
-import { AccountEntity } from '@app/common/entities/core/account.entity';
-import { UserEntity } from '@app/common/entities/core/user.entity';
+import { AccountEntity, UserEntity } from '@app/common/entities/core';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
