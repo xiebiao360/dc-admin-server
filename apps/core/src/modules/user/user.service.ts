@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core';
+import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import { AccountEntity, UserEntity } from '@app/common/entities/core';
 import { GenderEnum } from '@app/common/enums/gender.enum';
 import { ValidateException } from '@app/common/exceptions/validate.exception';
@@ -16,7 +16,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createByLocal(manager: EntityManager, dto: CreateByLocalDto) {
+  async createByLocal(manager: EntityManager, dto: UserCreateByLocalDto) {
     const account = await manager.find(AccountEntity, {
       where: { name: dto.account },
     });

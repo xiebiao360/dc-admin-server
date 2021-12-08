@@ -7,17 +7,17 @@ import { UserEntity } from './user.entity';
 @Entity({ name: 'sys_account' })
 export class AccountEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 64, unique: true, nullable: true })
-  name?: string;
+  name: string;
 
   @Exclude()
   @Column({ nullable: true })
-  password?: string;
+  password: string;
 
   @Column({ type: 'varchar', length: 15, unique: true, nullable: true })
-  phone?: string;
+  phone: string;
 
   @Column({ type: 'varchar', length: 64, unique: true, nullable: true })
-  wechat?: string;
+  wechat: string;
 
   @Column({
     name: 'last_login_date',

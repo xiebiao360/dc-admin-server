@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core';
+import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import {
   Body,
   Controller,
@@ -18,7 +18,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('auth/register')
-  create(@Body() createUserDto: CreateByLocalDto) {
+  create(@Body() createUserDto: UserCreateByLocalDto) {
     return this.authService.registerByLocal(createUserDto);
   }
 

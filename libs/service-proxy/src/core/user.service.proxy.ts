@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core';
+import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import { UserEntity } from '@app/common/entities/core/user.entity';
 import { Injectable } from '@nestjs/common';
 import { CoreServiceClient } from './core.service.client';
@@ -18,7 +18,7 @@ export class UserServiceProxy {
     );
   }
 
-  createByLocal(data: CreateByLocalDto) {
+  createByLocal(data: UserCreateByLocalDto) {
     return this.client.request<void>({ user: 'createByLocal' }, data);
   }
 }

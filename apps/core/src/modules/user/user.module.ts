@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
+/**
+ * 用户
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([AccountEntity, UserEntity])],
   controllers: [UserController],

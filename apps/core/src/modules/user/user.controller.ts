@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core';
+import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
@@ -11,7 +11,7 @@ export class UserController {
   @MessagePattern({ user: 'createByLocal' })
   @Transaction()
   async createByLocal(
-    @Payload() dto: CreateByLocalDto,
+    @Payload() dto: UserCreateByLocalDto,
     @TransactionManager() manager: EntityManager,
   ) {
     await this.userService.createByLocal(manager, dto);

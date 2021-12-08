@@ -1,4 +1,4 @@
-import { CreateByLocalDto } from '@app/common/dtos/core';
+import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import { UserEntity } from '@app/common/entities/core/user.entity';
 import { UserServiceProxy } from '@app/service-proxy';
 import { Injectable } from '@nestjs/common';
@@ -10,7 +10,7 @@ export class AuthService {
     private readonly userService: UserServiceProxy,
     private readonly jwtService: JwtService,
   ) {}
-  registerByLocal(dto: CreateByLocalDto) {
+  registerByLocal(dto: UserCreateByLocalDto) {
     return this.userService.createByLocal(dto);
   }
 

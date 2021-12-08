@@ -33,7 +33,7 @@ export class PermissionService {
   async create(dto: PermissionCreateDto) {
     if (!dto) {
       throw new CustomException(
-        'permission create dto is null!',
+        'permission create dto is not exist!',
         ResultCodeEnum.ValidateError,
       );
     }
@@ -59,16 +59,37 @@ export class PermissionService {
   async update(dto: PermissionUpdateDto) {
     if (!dto) {
       throw new CustomException(
-        'permission update dto is null!',
+        'permission update dto is not exist!',
         ResultCodeEnum.ValidateError,
       );
     }
     const { id, name, key, description, parentId } = dto;
+    const count = await this.permissionRepository.count({ id });
+    if (!count) {
+      throw new CustomException(
+        'permission update record is not exist!',
+        ResultCodeEnum.ValidateError,
+      );
+    }
     const entity = this.permissionRepository.create({ id });
     if (name) {
+      const nameCount = await this.permissionRepository.count({ name });
+      if (nameCount) {
+        throw new CustomException(
+          'permission update name exist!',
+          ResultCodeEnum.ValidateError,
+        );
+      }
       entity.name = name;
     }
     if (key) {
+      const keyCount = await this.permissionRepository.count({ key });
+      if (keyCount) {
+        throw new CustomException(
+          'permission update key exist!',
+          ResultCodeEnum.ValidateError,
+        );
+      }
       entity.key = key;
     }
     if (description) {
@@ -76,6 +97,12 @@ export class PermissionService {
     }
     if (parentId) {
       const parent = await this.permissionRepository.findOne(parentId);
+      if (!parent) {
+        throw new CustomException(
+          'permission update parent is not exist!',
+          ResultCodeEnum.ValidateError,
+        );
+      }
       entity.parent = parent;
     }
     await this.permissionRepository.save(entity);
