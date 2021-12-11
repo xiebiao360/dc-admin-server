@@ -13,6 +13,10 @@ export class GroupService {
     private readonly groupRepository: Repository<GroupEntity>,
   ) {}
 
+  async find() {
+    await this.groupRepository.find();
+  }
+
   async create(dto: GroupCreateDto) {
     if (!dto) {
       throw new CustomException(

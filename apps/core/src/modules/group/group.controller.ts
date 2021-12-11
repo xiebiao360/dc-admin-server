@@ -7,6 +7,11 @@ import { GroupService } from './group.service';
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
+  @MessagePattern({ role: 'find' })
+  async find() {
+    await this.groupService.find();
+  }
+
   @MessagePattern({ role: 'create' })
   async create(dto: GroupCreateDto) {
     await this.groupService.create(dto);

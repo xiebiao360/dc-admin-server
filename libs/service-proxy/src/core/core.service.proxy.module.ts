@@ -4,6 +4,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, TcpClientOptions } from '@nestjs/microservices';
 import ServiceConfig from '../service.config';
 import { CoreServiceClient } from './core.service.client';
+import { GroupServiceProxy } from './group.service.proxy';
+import { PermissionServiceProxy } from './permission.service.proxy';
+import { RoleServiceProxy } from './role.service.proxy';
 import { UserServiceProxy } from './user.service.proxy';
 
 @Module({
@@ -24,7 +27,15 @@ import { UserServiceProxy } from './user.service.proxy';
     },
     CoreServiceClient,
     UserServiceProxy,
+    RoleServiceProxy,
+    GroupServiceProxy,
+    PermissionServiceProxy,
   ],
-  exports: [UserServiceProxy],
+  exports: [
+    UserServiceProxy,
+    RoleServiceProxy,
+    GroupServiceProxy,
+    PermissionServiceProxy,
+  ],
 })
 export class CoreServiceProxyModule {}

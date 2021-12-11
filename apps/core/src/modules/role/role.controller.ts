@@ -8,6 +8,11 @@ import { RoleService } from './role.service';
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
+  @MessagePattern({ role: 'find' })
+  async find() {
+    await this.roleService.find();
+  }
+
   @MessagePattern({ role: 'create' })
   async create(dto: RoleCreateDto) {
     await this.roleService.create(dto);

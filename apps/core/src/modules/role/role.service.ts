@@ -14,6 +14,10 @@ export class RoleService {
     private readonly roleRepository: Repository<RoleEntity>,
   ) {}
 
+  async find() {
+    return await this.roleRepository.find();
+  }
+
   async create(dto: RoleCreateDto) {
     if (!dto) {
       throw new CustomException(
