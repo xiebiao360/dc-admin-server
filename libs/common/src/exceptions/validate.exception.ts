@@ -1,4 +1,4 @@
-import { ResultCodeEnum } from '../enums/result-code.enum';
+import { ResultCodeEnum } from '../enums';
 import { CustomException } from './custom.exception';
 
 export class ValidateException extends CustomException {

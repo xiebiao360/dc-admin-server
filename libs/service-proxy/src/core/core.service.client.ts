@@ -1,5 +1,5 @@
 import { GlobalConstant } from '@app/common/constants/global.constant';
-import { ResultCodeEnum } from '@app/common/enums/result-code.enum';
+import { ResultCodeEnum } from '@app/common/enums';
 import { IServiceClient } from '@app/common/interfaces/service.client.interface';
 import { ResultUtil } from '@app/common/utils/result.util';
 import { Inject, Injectable } from '@nestjs/common';

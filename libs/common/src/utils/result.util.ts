@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { ResultCodeEnum } from '../enums/result-code.enum';
+import { ResultCodeEnum } from '../enums';
 import { CustomException } from '../exceptions/custom.exception';
 
 export class ResultUtil<T> {

@@ -1,6 +1,6 @@
 import { UserCreateByLocalDto } from '@app/common/dtos/core';
 import { AccountEntity, UserEntity } from '@app/common/entities/core';
-import { GenderEnum } from '@app/common/enums/gender.enum';
+import { GenderEnum } from '@app/common/enums';
 import { ValidateException } from '@app/common/exceptions/validate.exception';
 import { CheckUtil } from '@app/common/utils/check.util';
 import { Injectable } from '@nestjs/common';

@@ -1,4 +1,4 @@
-import { GenderEnum } from '@app/common/enums/gender.enum';
+import { GenderEnum } from '@app/common/enums';
 import { dateTransformer } from '@app/common/transformers/date.transformer';
 import { enumTransformer } from '@app/common/transformers/enum.transformer';
 import { Exclude } from 'class-transformer';

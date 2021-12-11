@@ -1,4 +1,4 @@
-export class RoleCreateDto {
+export class GroupCreateDto {
   name: string;
 
   description?: string;

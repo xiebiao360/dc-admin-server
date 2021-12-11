@@ -3,7 +3,7 @@ import {
   PermissionUpdateDto,
 } from '@app/common/dtos/core';
 import { PermissionEntity } from '@app/common/entities/core';
-import { ResultCodeEnum } from '@app/common/enums/result-code.enum';
+import { ResultCodeEnum } from '@app/common/enums';
 import { CustomException } from '@app/common/exceptions/custom.exception';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
